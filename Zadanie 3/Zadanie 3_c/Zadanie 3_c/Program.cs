@@ -1,24 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
-namespace Zadanie_3
+namespace Zadanie_3_c
 {
-    static class Program
+    class Program
     {
-        /// <summary>
-        /// Główny punkt wejścia dla aplikacji.
-        /// </summary>
-        //[STAThread]
         static void Main(string[] args)
         {
-            // Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Form1());
-
-
             ObjectIndexor objectIndexor = new ObjectIndexor();
             EventsImpl events = new EventsImpl();
 
@@ -35,7 +26,9 @@ namespace Zadanie_3
 
             //Odczytanie poza zakresem
 
-            //int test = objectIndexor[8];
+            int test = objectIndexor[8];
+
+            objectIndexor.Printing();
 
             Console.ReadKey();
         }

@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Zadanie_3
+namespace Zadanie_3_c
 {
-
-   class ObjectIndexorEventArgs : EventArgs
+    class ObjectIndexorEventArgs : EventArgs
     {
         public int idxSize { get; set; }
         public int[] objs { get; set; }
@@ -96,7 +95,7 @@ namespace Zadanie_3
         public virtual void OnNewElement()
         {
             if (NewElement != null)
-                NewElement(this, new ObjectIndexorEventArgs() { idxSize = idxSize , objs = objs });
+                NewElement(this, new ObjectIndexorEventArgs() { idxSize = idxSize, objs = objs });
         }
 
     }
