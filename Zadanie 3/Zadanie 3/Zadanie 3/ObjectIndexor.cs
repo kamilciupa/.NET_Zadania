@@ -6,11 +6,21 @@ using System.Threading.Tasks;
 
 namespace Zadanie_3
 {
+
+   class ObjectIndexorEventArgs : EventArgs
+    {
+        public int idxSize { get; set; }
+        public int[] objs { get; set; }
+    }
+
     class ObjectIndexor
     {
 
         public int idxSize;
         private int[] objs;
+        public event EventHandler<ObjectIndexorEventArgs> NewElement;
+        public event EventHandler<ObjectIndexorEventArgs> NewSize;
+
 
         public ObjectIndexor()
         {
@@ -50,6 +60,7 @@ namespace Zadanie_3
                     idxSize += (i - idxSize) + 1;
                     Array.Resize<int>(ref objs, idxSize);
                     objs[i] = value;
+                    OnNewSize();
                 }
                 else
                 {
@@ -64,6 +75,8 @@ namespace Zadanie_3
             Array.Resize<int>(ref objs, objs.Length * 2);
             objs[idxSize] = value;
             idxSize++;
+            OnNewSize();
+            OnNewElement();
         }
 
 
@@ -72,6 +85,18 @@ namespace Zadanie_3
             for (int i = 0; i < idxSize; i++)
                 Console.WriteLine(i + ") komorka przechowuje " + objs[i] + "\n");
 
+        }
+
+        public virtual void OnNewSize()
+        {
+            if (NewSize != null)
+                NewSize(this, new ObjectIndexorEventArgs() { idxSize = idxSize });
+        }
+
+        public virtual void OnNewElement()
+        {
+            if (NewElement != null)
+                NewElement(this, new ObjectIndexorEventArgs() { idxSize = idxSize , objs = objs });
         }
 
     }

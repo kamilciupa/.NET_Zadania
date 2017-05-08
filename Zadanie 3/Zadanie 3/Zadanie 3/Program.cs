@@ -11,28 +11,33 @@ namespace Zadanie_3
         /// <summary>
         /// Główny punkt wejścia dla aplikacji.
         /// </summary>
-        [STAThread]
-        static void Main()
+        //[STAThread]
+        static void Main(string[] args)
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            // Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Form1());
 
 
             ObjectIndexor objectIndexor = new ObjectIndexor();
+            EventsImpl events = new EventsImpl();
 
-            /*
-            objectIndexor[0] = 1;
-            objectIndexor.Printing();
-            */
+            objectIndexor.NewSize += events.OnNewSize;
+            objectIndexor.NewElement += events.OnNewElement;
 
-            objectIndexor[3] = 4;
-            objectIndexor.Printing();
-            objectIndexor.Add(3);
-            objectIndexor.Add(12);
-            objectIndexor[9] = 66;
+            // Rozszerzenie tablicy do 5 elementu
+
+            objectIndexor[5] = 5;
+
+            // Dodanie elementu na koniec
+
             objectIndexor.Add(23);
-            objectIndexor.Printing();
+
+            //Odczytanie poza zakresem
+
+            //int test = objectIndexor[8];
+
+            Console.ReadKey();
         }
     }
 }
