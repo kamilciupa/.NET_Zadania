@@ -8,7 +8,7 @@ namespace Zadanie2Indeksator
 {
     class ObjectIndexor
     {
-        
+
         public int idxSize;
         private int[] objs;
 
@@ -35,7 +35,7 @@ namespace Zadanie2Indeksator
                         return objs[i];
                     }
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     Console.WriteLine(" Tablica nie ma indeksu " + i + "\n");
                     return 0;
@@ -45,9 +45,9 @@ namespace Zadanie2Indeksator
 
             set
             {
-                if(i > idxSize)
+                if (i > idxSize)
                 {
-                    idxSize += (i - idxSize)+1;
+                    idxSize += (i - idxSize) + 1;
                     Array.Resize<int>(ref objs, idxSize);
                     objs[i] = value;
                 }
@@ -55,7 +55,7 @@ namespace Zadanie2Indeksator
                 {
                     objs[i] = value;
                 }
-                
+
             }
         }
 
@@ -69,9 +69,9 @@ namespace Zadanie2Indeksator
 
         public void Printing()
         {
-            for(int i = 0; i < idxSize; i++)
+            Console.WriteLine("-----------");
+            for (int i = 0; i < idxSize; i++)
                 Console.WriteLine(i + ") komorka przechowuje " + objs[i] + "\n");
-
         }
 
     }
