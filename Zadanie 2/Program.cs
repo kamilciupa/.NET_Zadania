@@ -20,10 +20,20 @@ namespace Zadanie2Indeksator
 
 
             ObjectIndexor objectIndexor = new ObjectIndexor();
-            objectIndexor[0] = new Object();
-            //Object object2 = objectIndexor[10];
-            objectIndexor[12] = new Object();
-            Object object2 = objectIndexor[10];
+
+            /*
+            objectIndexor[0] = 1;
+            objectIndexor.Printing();
+            */
+
+            objectIndexor[3] = 4;
+            objectIndexor.Printing();
+            objectIndexor.Add(3);
+           objectIndexor.Add(12);
+            objectIndexor[9] = 66;
+            objectIndexor.Add(23);
+            objectIndexor.Printing();
+
         }
     }
 }

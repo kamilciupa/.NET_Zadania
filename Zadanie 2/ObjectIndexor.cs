@@ -9,31 +9,46 @@ namespace Zadanie2Indeksator
     class ObjectIndexor
     {
         
-        public int idxSize = 10;
+        public int idxSize;
+        private int[] objs;
+
+        public ObjectIndexor()
+        {
+            this.idxSize = 1;
+            this.objs = new int[idxSize];
+        }
 
 
-        private Object[] objs = new Object[10];
-        public Object this[int i]
+
+        public int this[int i]
         {
             get
             {
-               try
+                try
                 {
-                    return objs[i];
+                    if (i > idxSize)
+                    {
+                        throw new ArgumentOutOfRangeException();
+                    }
+                    else
+                    {
+                        return objs[i];
+                    }
                 }
-                catch (Exception ex)
+                catch(Exception)
                 {
-                    throw new ArgumentOutOfRangeException("Indexor out of bounds", ex);
+                    Console.WriteLine(" Tablica nie ma indeksu " + i + "\n");
+                    return 0;
                 }
-                
             }
 
 
             set
             {
-                if(i > objs.Length - 1)
+                if(i > idxSize)
                 {
-                    ChangeSize(i);
+                    idxSize += (i - idxSize)+1;
+                    Array.Resize<int>(ref objs, idxSize);
                     objs[i] = value;
                 }
                 else
@@ -44,26 +59,20 @@ namespace Zadanie2Indeksator
             }
         }
 
-        public void Add(Object value)
+        public void Add(int value)
         {
-            objs[objs.Length-1] = value;
+            Array.Resize<int>(ref objs, objs.Length * 2);
+            objs[idxSize] = value;
+            idxSize++;
         }
 
 
-        public void ChangeSize(int size)
+        public void Printing()
         {
-            Object[] temporary = new Object[idxSize];
-            for (int i = 0; i < objs.Length; i++)
-                temporary[i] = objs[i];
+            for(int i = 0; i < idxSize; i++)
+                Console.WriteLine(i + ") komorka przechowuje " + objs[i] + "\n");
 
-            objs = new Object[idxSize + size];
-
-            for (int i = 0; i < temporary.Length; i++)
-                objs[i] = temporary[i];
-
-           System.Console.WriteLine("Size is bigger now \n");
         }
-
 
     }
 }
