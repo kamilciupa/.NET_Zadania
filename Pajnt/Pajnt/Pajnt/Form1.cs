@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AForge.Imaging.Filters;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -45,10 +46,21 @@ namespace Pajnt
             dialog.ShowDialog();
             image = new Bitmap(dialog.FileName);
 
+            g.Clear(Color.White);
+            pbImage.Refresh();
 
-        if(image.Width <= pbImage.Width && image.Height <= pbImage.Height)
+            while (true)
             {
-                g.DrawImage(image, 0, 0, image.Width, image.Height);
+                if (image.Width <= pbImage.Width && image.Height <= pbImage.Height)
+                {
+                    g.DrawImage(image, 0, 0, image.Width, image.Height);
+                    break;
+                }
+                else
+                {
+                    g.DrawImage(image, 0, 0, image.Width/2, image.Height/2);
+                    break;
+                }
             }
 
             pbImage.Image = drawArea;
@@ -85,6 +97,48 @@ namespace Pajnt
             }
         }
 
+        private void filtr1ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Grayscale grayscale = new Grayscale(0.2126, 0.7152, 0.0722);
+            drawArea = grayscale.Apply(drawArea);
+            pbImage.Image = drawArea;
+            Image screenCopy = pbImage.Image;
+            drawArea = new Bitmap(pbImage.Width, pbImage.Height);
+            g = Graphics.FromImage(drawArea);
+            g.DrawImage(screenCopy, 0, 0, pbImage.Width, pbImage.Height);
+            pbImage.Image = drawArea;          
+        }
+
+
+        private void filtr2ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Sepia sepia = new Sepia();
+            drawArea = sepia.Apply(drawArea);
+            pbImage.Image = drawArea;
+            Image screenCopy = pbImage.Image;
+            drawArea = new Bitmap(pbImage.Width, pbImage.Height);
+            g = Graphics.FromImage(drawArea);
+            g.DrawImage(screenCopy, 0, 0, pbImage.Width, pbImage.Height);
+            pbImage.Image = drawArea;
+        }
+
+        private void pbImage_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void filtr3ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Blur blur = new Blur();
+            drawArea = blur.Apply(drawArea);
+            pbImage.Image = drawArea;
+            Image screenCopy = pbImage.Image;
+            drawArea = new Bitmap(pbImage.Width, pbImage.Height);
+            g = Graphics.FromImage(drawArea);
+            g.DrawImage(screenCopy, 0, 0, pbImage.Width, pbImage.Height);
+            pbImage.Image = drawArea;
+        }
+
         private void bColor_Click(object sender, EventArgs e)
         {
             ColorDialog dialog = new ColorDialog();
@@ -107,7 +161,7 @@ namespace Pajnt
 
         private void menuStrip1_SizeChanged(object sender, EventArgs e)
         {
-            
+            pbImage.Height = panel1.Height;
         }
     }
 

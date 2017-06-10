@@ -106,26 +106,29 @@
             this.filtr2ToolStripMenuItem,
             this.filtr3ToolStripMenuItem});
             this.filtrToolStripMenuItem.Name = "filtrToolStripMenuItem";
-            this.filtrToolStripMenuItem.Size = new System.Drawing.Size(94, 22);
+            this.filtrToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.filtrToolStripMenuItem.Text = "Filtr";
             // 
             // filtr1ToolStripMenuItem
             // 
             this.filtr1ToolStripMenuItem.Name = "filtr1ToolStripMenuItem";
-            this.filtr1ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
-            this.filtr1ToolStripMenuItem.Text = "Filtr1";
+            this.filtr1ToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.filtr1ToolStripMenuItem.Text = "Odcienie szarości";
+            this.filtr1ToolStripMenuItem.Click += new System.EventHandler(this.filtr1ToolStripMenuItem_Click);
             // 
             // filtr2ToolStripMenuItem
             // 
             this.filtr2ToolStripMenuItem.Name = "filtr2ToolStripMenuItem";
-            this.filtr2ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
-            this.filtr2ToolStripMenuItem.Text = "Filtr2";
+            this.filtr2ToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.filtr2ToolStripMenuItem.Text = "Sepia";
+            this.filtr2ToolStripMenuItem.Click += new System.EventHandler(this.filtr2ToolStripMenuItem_Click);
             // 
             // filtr3ToolStripMenuItem
             // 
             this.filtr3ToolStripMenuItem.Name = "filtr3ToolStripMenuItem";
-            this.filtr3ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
-            this.filtr3ToolStripMenuItem.Text = "Filtr3";
+            this.filtr3ToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.filtr3ToolStripMenuItem.Text = "Rozmycie";
+            this.filtr3ToolStripMenuItem.Click += new System.EventHandler(this.filtr3ToolStripMenuItem_Click);
             // 
             // bColor
             // 
@@ -163,6 +166,7 @@
             this.pbImage.Size = new System.Drawing.Size(656, 394);
             this.pbImage.TabIndex = 1;
             this.pbImage.TabStop = false;
+            this.pbImage.Click += new System.EventHandler(this.pbImage_Click);
             this.pbImage.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbImage_MouseMove);
             // 
             // panel1
