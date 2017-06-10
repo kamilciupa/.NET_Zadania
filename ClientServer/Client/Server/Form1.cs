@@ -34,6 +34,21 @@ namespace Server
             tbFolder.Text = dialog.SelectedPath;
         }
 
+        private String randomName()
+        {
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var stringChars = new char[8];
+            var random = new Random();
+
+            for (int i = 0; i < stringChars.Length; i++)
+            {
+                stringChars[i] = chars[random.Next(chars.Length)];
+            }
+
+            var finalString = new String(stringChars);
+            return finalString;
+        }
+
         private void bSet_Click(object sender, EventArgs e)
         {
             TcpListener server = null;
@@ -53,7 +68,7 @@ namespace Server
                 String data = null;
 
                 //listening loop
-
+                MessageBox.Show("Server is running");
                 lStats.Text = "Waiting ... ";
                 while (true)
                 {
@@ -68,7 +83,7 @@ namespace Server
 
                     try
                     {
-                        Stream fileStream = File.OpenWrite(tbFolder.Text + "\\cos." + typeFile);
+                        Stream fileStream = File.OpenWrite(tbFolder.Text + "\\" + randomName() + "." + typeFile);
                         while (true)
                         {
                             i = stream.Read(buffer, 0, 2048);
