@@ -42,10 +42,10 @@
             this.tbRozmiar = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pbImage = new System.Windows.Forms.PictureBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -106,7 +106,7 @@
             this.filtr2ToolStripMenuItem,
             this.filtr3ToolStripMenuItem});
             this.filtrToolStripMenuItem.Name = "filtrToolStripMenuItem";
-            this.filtrToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.filtrToolStripMenuItem.Size = new System.Drawing.Size(94, 22);
             this.filtrToolStripMenuItem.Text = "Filtr";
             // 
             // filtr1ToolStripMenuItem
@@ -132,9 +132,9 @@
             // 
             // bColor
             // 
-            this.bColor.Location = new System.Drawing.Point(15, 9);
+            this.bColor.Location = new System.Drawing.Point(275, 2);
             this.bColor.Name = "bColor";
-            this.bColor.Size = new System.Drawing.Size(75, 44);
+            this.bColor.Size = new System.Drawing.Size(72, 20);
             this.bColor.TabIndex = 2;
             this.bColor.Text = "Kolor";
             this.bColor.UseVisualStyleBackColor = true;
@@ -142,7 +142,7 @@
             // 
             // tbRozmiar
             // 
-            this.tbRozmiar.Location = new System.Drawing.Point(15, 117);
+            this.tbRozmiar.Location = new System.Drawing.Point(194, 2);
             this.tbRozmiar.Name = "tbRozmiar";
             this.tbRozmiar.Size = new System.Drawing.Size(75, 20);
             this.tbRozmiar.TabIndex = 3;
@@ -152,7 +152,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 92);
+            this.label1.Location = new System.Drawing.Point(143, 5);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(45, 13);
             this.label1.TabIndex = 4;
@@ -160,33 +160,42 @@
             // 
             // pbImage
             // 
-            this.pbImage.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pbImage.Location = new System.Drawing.Point(162, 0);
+            this.pbImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbImage.Location = new System.Drawing.Point(3, 3);
             this.pbImage.Name = "pbImage";
-            this.pbImage.Size = new System.Drawing.Size(656, 394);
+            this.pbImage.Size = new System.Drawing.Size(812, 393);
+            this.pbImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbImage.TabIndex = 1;
             this.pbImage.TabStop = false;
             this.pbImage.Click += new System.EventHandler(this.pbImage_Click);
             this.pbImage.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbImage_MouseMove);
             // 
-            // panel1
+            // tableLayoutPanel1
             // 
-            this.panel1.Controls.Add(this.pbImage);
-            this.panel1.Controls.Add(this.bColor);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 24);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(818, 394);
-            this.panel1.TabIndex = 5;
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.pbImage, 0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 21);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(818, 399);
+            this.tableLayoutPanel1.TabIndex = 5;
+            this.tableLayoutPanel1.Resize += new System.EventHandler(this.tableLayoutPanel1_Resize);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(818, 418);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.bColor);
             this.Controls.Add(this.tbRozmiar);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
@@ -194,7 +203,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
-            this.panel1.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -216,7 +225,7 @@
         private System.Windows.Forms.TextBox tbRozmiar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pbImage;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }
 
