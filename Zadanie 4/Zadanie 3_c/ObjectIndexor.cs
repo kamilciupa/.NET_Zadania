@@ -72,7 +72,7 @@ namespace Zadanie_4
 
         public void Add(int value)
         {
-            Array.Resize<int>(ref objs, objs.Length * 2);
+            Array.Resize<int>(ref objs, idxSize * 2);
             objs[idxSize] = value;
             idxSize++;
             //OnNewSize();
@@ -87,21 +87,23 @@ namespace Zadanie_4
                 Add(value);
                 Console.WriteLine("Blocking) Dodano wartość " + value + "\n");
                 stopwatch.Stop();
-                Console.Write("Blocking) Czas oczekiwania na dostęp: " + stopwatch.ElapsedMilliseconds + "\n");
+                Console.Write("Blocking) Czas oczekiwania na dostęp: " + stopwatch.ElapsedTicks + "\n");
             }
         }
 
-        public void NonBlockingAdd(int value)
+        public bool NonBlockingAdd(int value)
         {
+
            if( System.Threading.Monitor.TryEnter(thisLock))
             {
                 Add(value);
                 Console.WriteLine("NonBlocking) Dodano wartość: "+ value + "\n");
                 System.Threading.Monitor.Exit(thisLock);
+                return true;
             }
             else
             {
-                Console.WriteLine("NonBlocking)  Nie dodano wartosci" + "\n");
+                return false;
             }
         }
 

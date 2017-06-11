@@ -36,8 +36,11 @@ namespace Zadanie_4
             {
                 while(howLong2 < 20)
                 {
+                    if (!objectIndexor.NonBlockingAdd(25))
+                    {
+                        Console.WriteLine("NonBlocking)  Nie dodano wartosci" + "\n");
+                    } 
                     Thread.Sleep(300);
-                    objectIndexor.NonBlockingAdd(25);
                     howLong2++;
                 }
             });

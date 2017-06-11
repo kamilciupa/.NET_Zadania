@@ -18,8 +18,16 @@ namespace Zadanie2Indeksator
             objectIndexor.Add(12);
             objectIndexor[9] = 66;
             objectIndexor.Add(23);
-            objectIndexor.Printing();
+            
 
+
+            objectIndexor.Add(23);
+                objectIndexor.Add(23);
+                objectIndexor.Add(23);
+
+
+
+            objectIndexor.Printing();
             Console.ReadLine();
         }
     }

@@ -71,7 +71,8 @@ namespace Zadanie_3_c
 
         public void Add(int value)
         {
-            Array.Resize<int>(ref objs, objs.Length * 2);
+            //Array.Resize<int>(ref objs, objs.Length * 2);
+            Array.Resize<int>(ref objs, idxSize * 2);
             objs[idxSize] = value;
             idxSize++;
             OnNewSize();
