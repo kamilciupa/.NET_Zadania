@@ -62,15 +62,19 @@ namespace Client
                         Stream fileStream = File.OpenRead(tbFile.Text);
                         Byte[] dataBytes = new byte[fileStream.Length];
                         Byte[] fileType = new byte[3];
-
+                        Byte[] fileSize = new byte[3];
 
                         var type = tbFile.Text.Split('.');
                         fileType = Encoding.UTF8.GetBytes(type[type.Length - 1]);
+                        fileSize = Encoding.UTF8.GetBytes(fileStream.Length.ToString());
 
                         fileStream.Read(dataBytes, 0, (int)fileStream.Length);
                         NetworkStream networkStream = client.GetStream();
 
                         networkStream.Write(fileType, 0, fileType.GetLength(0));
+
+                        networkStream.Write(fileSize, 0, fileSize.GetLength(0));
+
                         networkStream.Write(dataBytes, 0, dataBytes.GetLength(0));
                         networkStream.Close();
                         MessageBox.Show("File was send");

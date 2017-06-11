@@ -24,7 +24,7 @@ namespace Zadanie_4
             int howLong2 = 0;
             Thread t1 = new Thread(() =>
             {
-                while (howLong < 20)
+                while (howLong < 30)
                 {
                     Thread.Sleep(300);
                     objectIndexor.BlockingAdd(50);
@@ -34,7 +34,7 @@ namespace Zadanie_4
 
             Thread t2 = new Thread(() =>
             {
-                while(howLong2 < 20)
+                while(howLong2 < 30)
                 {
                     if (!objectIndexor.NonBlockingAdd(25))
                     {

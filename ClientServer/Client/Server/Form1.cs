@@ -66,6 +66,7 @@ namespace Server
                 Byte[] buffer = new Byte[2048];
                 Byte[] fileTyp = new Byte[3];
                 String data = null;
+                Byte[] size = new Byte[3];
 
                 //listening loop
                 MessageBox.Show("Server is running");
@@ -81,12 +82,15 @@ namespace Server
                     stream.Read(fileTyp, 0, 3);
                     string typeFile = Encoding.UTF8.GetString(fileTyp);
 
+                    stream.Read(size, 0, 3);
+                    int sizeFile = Int32.Parse(Encoding.UTF8.GetString(size));
+
                     try
                     {
                         Stream fileStream = File.OpenWrite(tbFolder.Text + "\\" + randomName() + "." + typeFile);
                         while (true)
                         {
-                            i = stream.Read(buffer, 0, 2048);
+                            i = stream.Read(buffer, 0, sizeFile);
                             fileStream.Write(buffer, 0, i);
                             if (i == 0) break;
                         }

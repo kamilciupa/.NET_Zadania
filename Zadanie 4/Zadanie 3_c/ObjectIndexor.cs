@@ -81,7 +81,9 @@ namespace Zadanie_4
 
         public void BlockingAdd(int value)
         {
-            lock (thisLock)
+            // lock (thisLock)
+            System.Threading.Monitor.Enter(thisLock);
+            try
             {
                 Stopwatch stopwatch = Stopwatch.StartNew();
                 Add(value);
@@ -89,23 +91,37 @@ namespace Zadanie_4
                 stopwatch.Stop();
                 Console.Write("Blocking) Czas oczekiwania na dostęp: " + stopwatch.ElapsedTicks + "\n");
             }
+            catch (Exception)
+            {
+
+            } finally
+            {
+                System.Threading.Monitor.Exit(thisLock);
+            }
         }
 
         public bool NonBlockingAdd(int value)
         {
 
-           if( System.Threading.Monitor.TryEnter(thisLock))
+            if (!System.Threading.Monitor.TryEnter(thisLock)) return false;
+            try
             {
                 Add(value);
-                Console.WriteLine("NonBlocking) Dodano wartość: "+ value + "\n");
-                System.Threading.Monitor.Exit(thisLock);
+                Console.WriteLine("NonBlocking) Dodano wartość: " + value + "\n");
+                // System.Threading.Monitor.Exit(thisLock);
                 return true;
             }
-            else
+            catch (Exception)
             {
-                return false;
+
             }
-        }
+            finally
+            {
+                System.Threading.Monitor.Exit(thisLock);
+            }
+            return true;
+
+    }
 
 
         public void Printing()
