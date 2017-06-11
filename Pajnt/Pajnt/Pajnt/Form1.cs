@@ -140,13 +140,22 @@ namespace Pajnt
 
         private void panel1_SizeChanged(object sender, EventArgs e)
         {
-            
+          
         }
 
         private void tableLayoutPanel1_Resize(object sender, EventArgs e)
         {
             pbImage.Width = tableLayoutPanel1.Width;
             pbImage.Height = tableLayoutPanel1.Height;
+        }
+
+        private void pbImage_SizeChanged(object sender, EventArgs e)
+        {
+            Image screenCopy = pbImage.Image;
+            drawArea = new Bitmap(pbImage.Width, pbImage.Height);
+            g = Graphics.FromImage(drawArea);
+            g.DrawImage(screenCopy, 0, 0, pbImage.Width, pbImage.Height);
+            pbImage.Image = drawArea;
         }
 
         private void bColor_Click(object sender, EventArgs e)

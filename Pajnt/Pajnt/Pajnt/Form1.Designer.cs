@@ -167,6 +167,7 @@
             this.pbImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbImage.TabIndex = 1;
             this.pbImage.TabStop = false;
+            this.pbImage.SizeChanged += new System.EventHandler(this.pbImage_SizeChanged);
             this.pbImage.Click += new System.EventHandler(this.pbImage_Click);
             this.pbImage.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbImage_MouseMove);
             // 
