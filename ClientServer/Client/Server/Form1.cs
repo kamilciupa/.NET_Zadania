@@ -52,9 +52,7 @@ namespace Server
         private void bSet_Click(object sender, EventArgs e)
         {
             TcpListener server = null;
-            try
-            {
-                // options
+             // options
                 try
                 {
                     Int32 port = Int32.Parse(tbPort.Text);
@@ -70,23 +68,36 @@ namespace Server
                     Byte[] fileTyp = new Byte[3];
                     String data = null;
                     Byte[] size = new Byte[3];
-
+                    string typeFile;
+                    int sizeFile;
                     //listening loop
                     MessageBox.Show("Server is running");
-                    lStats.Text = "Waiting ... ";
+                    
                     while (true)
                     {
 
 
                         TcpClient client = server.AcceptTcpClient();
-                        lStats.Text = "Connected!";
+                        
                         NetworkStream stream = client.GetStream();
                         int i;
                         stream.Read(fileTyp, 0, 3);
-                        string typeFile = Encoding.UTF8.GetString(fileTyp);
+                    try
+                    {
+                        typeFile = Encoding.UTF8.GetString(fileTyp);
+                    } catch (FormatException)
+                    {
+                        typeFile = "";
+                    }
 
                         stream.Read(size, 0, 3);
-                        int sizeFile = Int32.Parse(Encoding.UTF8.GetString(size));
+                    try
+                    {
+                        sizeFile = Int32.Parse(Encoding.UTF8.GetString(size));
+                    } catch (FormatException)
+                    {
+                        sizeFile = 0;
+                    }
 
                         try
                         {
@@ -98,7 +109,7 @@ namespace Server
                                 if (i == 0) break;
                             }
                             fileStream.Close();
-                            lStats.Text = "File is saved!";
+                            
                         }
                         catch (Exception)
                         {
@@ -115,10 +126,7 @@ namespace Server
                     server.Stop();
                     lStats.Text = "Server is offline";
                 }
-            } catch (Exception)
-            {
-                MessageBox.Show("Wrong input");
-            }
+           
         }
     }
 }

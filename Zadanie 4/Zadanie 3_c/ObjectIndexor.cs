@@ -27,7 +27,6 @@ namespace Zadanie_4
             this.idxSize = 1;
             this.objs = new int[idxSize];
             EventsImpl events = new EventsImpl();
-
             this.NewSize += events.OnNewSize;
             this.NewElement += events.OnNewElement;
         }

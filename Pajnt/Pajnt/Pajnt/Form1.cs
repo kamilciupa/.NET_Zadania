@@ -75,11 +75,18 @@ namespace Pajnt
         private void zapiszToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog save = new SaveFileDialog();
-
-            save.Filter = "Files|*.jpg;*.jpeg;";
-            if(save.ShowDialog() == DialogResult.OK)
+          
+            save.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif";
+            if (save.ShowDialog() == DialogResult.OK)
             {
-                pbImage.Image.Save(save.FileName, ImageFormat.Jpeg);
+                reset();
+                if(image != null)
+                image.Dispose();
+
+                if (System.IO.File.Exists(save.FileName))
+                    System.IO.File.Delete(save.FileName);
+
+                drawArea.Save(save.FileName, ImageFormat.Jpeg);
             }
 
         }
@@ -101,11 +108,7 @@ namespace Pajnt
             Grayscale grayscale = new Grayscale(0.2126, 0.7152, 0.0722);
             drawArea = grayscale.Apply(drawArea);
             pbImage.Image = drawArea;
-            Image screenCopy = pbImage.Image;
-            drawArea = new Bitmap(pbImage.Width, pbImage.Height);
-            g = Graphics.FromImage(drawArea);
-            g.DrawImage(screenCopy, 0, 0, pbImage.Width, pbImage.Height);
-            pbImage.Image = drawArea;          
+            reset();         
         }
 
 
@@ -114,11 +117,7 @@ namespace Pajnt
             Sepia sepia = new Sepia();
             drawArea = sepia.Apply(drawArea);
             pbImage.Image = drawArea;
-            Image screenCopy = pbImage.Image;
-            drawArea = new Bitmap(pbImage.Width, pbImage.Height);
-            g = Graphics.FromImage(drawArea);
-            g.DrawImage(screenCopy, 0, 0, pbImage.Width, pbImage.Height);
-            pbImage.Image = drawArea;
+            reset();
         }
 
         private void pbImage_Click(object sender, EventArgs e)
@@ -131,11 +130,7 @@ namespace Pajnt
             Blur blur = new Blur();
             drawArea = blur.Apply(drawArea);
             pbImage.Image = drawArea;
-            Image screenCopy = pbImage.Image;
-            drawArea = new Bitmap(pbImage.Width, pbImage.Height);
-            g = Graphics.FromImage(drawArea);
-            g.DrawImage(screenCopy, 0, 0, pbImage.Width, pbImage.Height);
-            pbImage.Image = drawArea;
+            reset();
         }
 
         private void panel1_SizeChanged(object sender, EventArgs e)
@@ -151,11 +146,7 @@ namespace Pajnt
 
         private void pbImage_SizeChanged(object sender, EventArgs e)
         {
-            Image screenCopy = pbImage.Image;
-            drawArea = new Bitmap(pbImage.Width, pbImage.Height);
-            g = Graphics.FromImage(drawArea);
-            g.DrawImage(screenCopy, 0, 0, pbImage.Width, pbImage.Height);
-            pbImage.Image = drawArea;
+            reset();
         }
 
         private void bColor_Click(object sender, EventArgs e)
@@ -182,6 +173,17 @@ namespace Pajnt
         {
            
         }
+
+        private void reset()
+        {
+            Image screenCopy = pbImage.Image;
+            drawArea = new Bitmap(pbImage.Width, pbImage.Height);
+            g = Graphics.FromImage(drawArea);
+            g.DrawImage(screenCopy, 0, 0, pbImage.Width, pbImage.Height);
+            pbImage.Image = drawArea;
+
+        }
+
     }
 
 

@@ -11,7 +11,9 @@ namespace Zadanie_3_c
         static void Main(string[] args)
         {
             ObjectIndexor objectIndexor = new ObjectIndexor();
-
+            EventsImpl events = new EventsImpl();
+            objectIndexor.NewSize += events.OnNewSize;
+            objectIndexor.NewElement += events.OnNewElement;
             // Rozszerzenie tablicy do 5 elementu
 
             objectIndexor[5] = 5;

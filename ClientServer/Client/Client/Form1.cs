@@ -59,6 +59,8 @@ namespace Client
                 {
                     try
                     {
+                        bool isGood = false;
+
                         Stream fileStream = File.OpenRead(tbFile.Text);
                         Byte[] dataBytes = new byte[fileStream.Length];
                         Byte[] fileType = new byte[3];
@@ -70,19 +72,23 @@ namespace Client
 
                         fileStream.Read(dataBytes, 0, (int)fileStream.Length);
                         NetworkStream networkStream = client.GetStream();
+                        isGood = true;
+                        if (isGood)
+                        {
+                            networkStream.Write(fileType, 0, fileType.GetLength(0));
 
-                        networkStream.Write(fileType, 0, fileType.GetLength(0));
+                            networkStream.Write(fileSize, 0, fileSize.GetLength(0));
 
-                        networkStream.Write(fileSize, 0, fileSize.GetLength(0));
-
-                        networkStream.Write(dataBytes, 0, dataBytes.GetLength(0));
-                        networkStream.Close();
-                        MessageBox.Show("File was send");
+                            networkStream.Write(dataBytes, 0, dataBytes.GetLength(0));
+                            networkStream.Close();
+                            MessageBox.Show("File was send");
+                        }
+                    
                     }
-                    catch (ArgumentException)
+                    catch (Exception)
                     {
                         MessageBox.Show("Cannot open file!");
-                    }
+                    } 
 
 
 
