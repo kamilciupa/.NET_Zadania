@@ -55,61 +55,69 @@ namespace Server
             try
             {
                 // options
-                Int32 port = Int32.Parse(tbPort.Text);
-                IPAddress ipAddress = IPAddress.Parse(tbIP.Text);
-                // new tcp
-                server = new TcpListener(ipAddress, port);
-                //listen
-                server.Start();
-
-                //buffer for reading data temporary xD 
-                Byte[] buffer = new Byte[2048];
-                Byte[] fileTyp = new Byte[3];
-                String data = null;
-                Byte[] size = new Byte[3];
-
-                //listening loop
-                MessageBox.Show("Server is running");
-                lStats.Text = "Waiting ... ";
-                while (true)
+                try
                 {
+                    Int32 port = Int32.Parse(tbPort.Text);
+                    IPAddress ipAddress = IPAddress.Parse(tbIP.Text);
 
+                    // new tcp
+                    server = new TcpListener(ipAddress, port);
+                    //listen
+                    server.Start();
 
-                    TcpClient client = server.AcceptTcpClient();
-                    lStats.Text = "Connected!";
-                    NetworkStream stream = client.GetStream();
-                    int i;
-                    stream.Read(fileTyp, 0, 3);
-                    string typeFile = Encoding.UTF8.GetString(fileTyp);
+                    //buffer for reading data temporary xD 
+                    Byte[] buffer = new Byte[2048];
+                    Byte[] fileTyp = new Byte[3];
+                    String data = null;
+                    Byte[] size = new Byte[3];
 
-                    stream.Read(size, 0, 3);
-                    int sizeFile = Int32.Parse(Encoding.UTF8.GetString(size));
-
-                    try
+                    //listening loop
+                    MessageBox.Show("Server is running");
+                    lStats.Text = "Waiting ... ";
+                    while (true)
                     {
-                        Stream fileStream = File.OpenWrite(tbFolder.Text + "\\" + randomName() + "." + typeFile);
-                        while (true)
+
+
+                        TcpClient client = server.AcceptTcpClient();
+                        lStats.Text = "Connected!";
+                        NetworkStream stream = client.GetStream();
+                        int i;
+                        stream.Read(fileTyp, 0, 3);
+                        string typeFile = Encoding.UTF8.GetString(fileTyp);
+
+                        stream.Read(size, 0, 3);
+                        int sizeFile = Int32.Parse(Encoding.UTF8.GetString(size));
+
+                        try
                         {
-                            i = stream.Read(buffer, 0, sizeFile);
-                            fileStream.Write(buffer, 0, i);
-                            if (i == 0) break;
+                            Stream fileStream = File.OpenWrite(tbFolder.Text + "\\" + randomName() + "." + typeFile);
+                            while (true)
+                            {
+                                i = stream.Read(buffer, 0, sizeFile);
+                                fileStream.Write(buffer, 0, i);
+                                if (i == 0) break;
+                            }
+                            fileStream.Close();
+                            lStats.Text = "File is saved!";
                         }
-                        fileStream.Close();
-                        lStats.Text = "File is saved!";
-                    } catch (Exception)
-                    {
-                        MessageBox.Show("Something is wrong");
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Something is wrong");
+                        }
                     }
                 }
-            }
-            catch (SocketException)
+                catch (SocketException)
+                {
+                    lStats.Text = "Socket Exception";
+                }
+                finally
+                {
+                    server.Stop();
+                    lStats.Text = "Server is offline";
+                }
+            } catch (Exception)
             {
-                lStats.Text = "Socket Exception";
-            }
-            finally
-            {
-                server.Stop();
-                lStats.Text = "Server is offline"; 
+                MessageBox.Show("Wrong input");
             }
         }
     }

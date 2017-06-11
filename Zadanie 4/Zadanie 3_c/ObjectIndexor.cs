@@ -26,6 +26,10 @@ namespace Zadanie_4
         {
             this.idxSize = 1;
             this.objs = new int[idxSize];
+            EventsImpl events = new EventsImpl();
+
+            this.NewSize += events.OnNewSize;
+            this.NewElement += events.OnNewElement;
         }
 
 
@@ -59,13 +63,10 @@ namespace Zadanie_4
                 {
                     idxSize += (i - idxSize) + 1;
                     Array.Resize<int>(ref objs, idxSize);
-                    objs[i] = value;
+                  
                     OnNewSize();
                 }
-                else
-                {
                     objs[i] = value;
-                }
 
             }
         }

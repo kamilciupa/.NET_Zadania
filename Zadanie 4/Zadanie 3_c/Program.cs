@@ -14,10 +14,6 @@ namespace Zadanie_4
         static void Main(string[] args)
         {
             ObjectIndexor objectIndexor = new ObjectIndexor();
-            EventsImpl events = new EventsImpl();
-
-            objectIndexor.NewSize += events.OnNewSize;
-            objectIndexor.NewElement += events.OnNewElement;
 
 
             int howLong = 0;

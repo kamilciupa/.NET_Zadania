@@ -49,19 +49,15 @@ namespace Zadanie2Indeksator
                 {
                     idxSize += (i - idxSize) + 1;
                     Array.Resize<int>(ref objs, idxSize);
-                    objs[i] = value;
                 }
-                else
-                {
                     objs[i] = value;
-                }
 
             }
         }
 
         public void Add(int value)
         {
-            //Array.Resize<int>(ref objs, objs.Length * 2);
+           
             Array.Resize<int>(ref objs, idxSize * 2);
             objs[idxSize] = value;
             idxSize++;
@@ -73,7 +69,7 @@ namespace Zadanie2Indeksator
             Console.WriteLine("-----------");
             for (int i = 0; i < idxSize; i++)
                 Console.WriteLine(i + ") komorka przechowuje " + objs[i] + "\n");
-            Console.WriteLine("D E B U G ) Real size " + objs.Length + "\n");
+           
         }
 
     }
